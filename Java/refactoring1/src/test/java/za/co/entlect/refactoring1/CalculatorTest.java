@@ -1,9 +1,11 @@
 package za.co.entlect.refactoring1;
 
 import org.junit.Test;
-import za.co.entelect.refactoring1.AccountType;
-import za.co.entelect.refactoring1.BankAccount;
-import za.co.entelect.refactoring1.Calculator;
+import za.co.entelect.refactoring1.*;
+import za.co.entelect.refactoring1.domain.BankAccount;
+import za.co.entelect.refactoring1.domain.ChequeAccount;
+import za.co.entelect.refactoring1.domain.MoneyMarketAccount;
+import za.co.entelect.refactoring1.domain.SavingsAccount;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -50,13 +52,13 @@ public class CalculatorTest {
     }
 
     private void createTestAccounts(long initialBalance) {
-        savingsAccount = new BankAccount(AccountType.SAVINGS, initialBalance,
+        savingsAccount = new SavingsAccount(initialBalance,
                 BankAccount.SAVINGS_CREDIT_INTEREST_RATE, BankAccount.SAVINGS_DEBIT_INTEREST_RATE);
 
-        chequeAccount = new BankAccount(AccountType.CHEQUE, initialBalance,
+        chequeAccount = new ChequeAccount(initialBalance,
                 BankAccount.CHEQUE_CREDIT_INTEREST_RATE, BankAccount.CHEQUE_MARKET_DEBIT_INTEREST_RATE);
 
-        moneyMarketAccount = new BankAccount(AccountType.MONEY_MARKET, initialBalance,
+        moneyMarketAccount = new MoneyMarketAccount(initialBalance,
                 BankAccount.MONEY_MARKET_CREDIT_INTEREST_RATE, BankAccount.MONEY_MARKET_DEBIT_INTEREST_RATE);
     }
 }

@@ -1,4 +1,4 @@
-package za.co.entelect.refactoring1;
+package za.co.entelect.refactoring1.domain;
 
 public enum AccountType {
     SAVINGS,

@@ -1,8 +1,8 @@
 package za.co.entelect.refactoring1;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import za.co.entelect.refactoring1.domain.AccountType;
+import za.co.entelect.refactoring1.domain.BankAccount;
+import za.co.entelect.refactoring1.exception.BankAccountException;
 
 /**
  * This exercise demonstrates the following code smells
@@ -20,7 +20,7 @@ public class Calculator {
         if(bankAccount.getAccountType() == AccountType.SAVINGS){
             //negative balances are not supported
             if(bankAccount.getBalanceInCents() < 0){
-                throw new RuntimeException("Negative balance not allowed");
+                throw new BankAccountException("Negative balance not allowed");
             }
             bankAccount.updateBalance((long) (bankAccount.getBalanceInCents() * bankAccount.getCreditInterestsRate()));
         }
@@ -38,7 +38,7 @@ public class Calculator {
         if(bankAccount.getAccountType() == AccountType.MONEY_MARKET){
             //negative balances are not allowed
             if(bankAccount.getBalanceInCents() < 0){
-                throw new RuntimeException("Negative balance not allowed");
+                throw new BankAccountException("Negative balance not allowed");
             }
             bankAccount.updateBalance((long) (bankAccount.getBalanceInCents() * bankAccount.getCreditInterestsRate()));
         }

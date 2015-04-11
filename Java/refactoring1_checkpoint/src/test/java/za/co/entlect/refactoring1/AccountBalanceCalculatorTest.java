@@ -1,19 +1,19 @@
 package za.co.entlect.refactoring1;
 
 import org.junit.Test;
-import za.co.entelect.refactoring1.AccountCalculator;
+import za.co.entelect.refactoring1.AccountBalanceCalculator;
 import za.co.entelect.refactoring1.AccountType;
 import za.co.entelect.refactoring1.BankAccount;
 
 import static junit.framework.Assert.assertEquals;
 
-public class CalculatorTest {
+public class AccountBalanceCalculatorTest {
 
     private BankAccount savingsAccount;
     private BankAccount moneyMarketAccount;
     private BankAccount chequeAccount;
 
-    private AccountCalculator calculator = new AccountCalculator();
+    private AccountBalanceCalculator calculator = new AccountBalanceCalculator();
 
     @Test
     public void testPositiveBalance() {

@@ -1,6 +1,6 @@
-package za.co.entelect.refactoring1;
+package za.co.entelect.refactoring1.domain;
 
-public class BankAccount {
+public abstract class BankAccount {
 
     public static final double SAVINGS_CREDIT_INTEREST_RATE = 0.05D;
     public static final double SAVINGS_DEBIT_INTEREST_RATE = Double.NaN;
@@ -11,21 +11,18 @@ public class BankAccount {
     public static final double CHEQUE_CREDIT_INTEREST_RATE = 0.04D;
     public static final double CHEQUE_MARKET_DEBIT_INTEREST_RATE = 0.12D;
 
-    private final AccountType accountType;
     private final double creditInterestsRate;
     private final double debitInterestRate;
     private Long balanceInCents;
+    private boolean accountActive = true;
 
-    public BankAccount(AccountType accountType, Long balanceInCents, double creditInterestsRate, double debitInterestRate) {
-        this.accountType = accountType;
+    public BankAccount(Long balanceInCents, double creditInterestsRate, double debitInterestRate) {
         this.balanceInCents = balanceInCents;
         this.creditInterestsRate = creditInterestsRate;
         this.debitInterestRate = debitInterestRate;
     }
 
-    public AccountType getAccountType() {
-        return accountType;
-    }
+    public abstract AccountType getAccountType();
 
     public long getBalanceInCents() {
         return balanceInCents;
@@ -41,5 +38,17 @@ public class BankAccount {
 
     public double getDebitInterestRate() {
         return debitInterestRate;
+    }
+
+    public boolean isAccountActive() {
+        return accountActive;
+    }
+
+    public void closeAccount() {
+        this.accountActive = false;
+    }
+
+    public void reopenAccount() {
+        this.accountActive = true;
     }
 }
