@@ -1,23 +1,35 @@
 package za.co.entlect.refactoring1.controller;
 
 import org.junit.Test;
-import za.co.entelect.refactoring1.controller.BankingAction;
+import za.co.entelect.refactoring1.domain.BankingAction;
 import za.co.entelect.refactoring1.controller.BankingController;
 import za.co.entelect.refactoring1.domain.BankAccount;
+import za.co.entelect.refactoring1.domain.ChequeAccount;
 import za.co.entelect.refactoring1.domain.SavingsAccount;
 import za.co.entelect.refactoring1.exception.BankAccountException;
+import za.co.entelect.refactoring1.service.ImageService;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
 
 public class BankingControllerTest {
+
+    public static final long INITIAL_BALANCE = 3000L;
 
     private BankingController bankingController = new BankingController();
 
     @Test
+    public void testFetchImage(){
+        assertNotNull(bankingController.fetchImage(ImageService.DEFAULT_IMAGE));
+    }
+
+    @Test
+    public void testUploadImage(){
+        assertNotNull(bankingController.uploadImage("1", new byte[1]));
+    }
+
+    @Test
     public void testRecalculateBalance(){
-        SavingsAccount savingsAccount = createSavingsAccount(3000);
+        SavingsAccount savingsAccount = createSavingsAccount(INITIAL_BALANCE);
 
         bankingController.updateAccount(savingsAccount, BankingAction.RECALCULATE_BALANCE);
 
@@ -26,7 +38,7 @@ public class BankingControllerTest {
 
     @Test
     public void testCloseAccount(){
-        SavingsAccount savingsAccount = createSavingsAccount(3000L);
+        SavingsAccount savingsAccount = createSavingsAccount(INITIAL_BALANCE);
         assertTrue(savingsAccount.isAccountActive());
 
         bankingController.updateAccount(savingsAccount, BankingAction.CLOSE_ACCOUNT);
@@ -38,7 +50,7 @@ public class BankingControllerTest {
 
     @Test
     public void testReopenAccount(){
-        SavingsAccount savingsAccount = createSavingsAccount(3000L);
+        SavingsAccount savingsAccount = createSavingsAccount(INITIAL_BALANCE);
         savingsAccount.closeAccount();
 
         assertFalse(savingsAccount.isAccountActive());
@@ -48,11 +60,19 @@ public class BankingControllerTest {
     }
 
     @Test
-    public void testReopenOpenAccount(){
-        SavingsAccount savingsAccount = createSavingsAccount(3000L);
+    public void testReopenOpenSavingsAccount(){
+        SavingsAccount savingsAccount = createSavingsAccount(INITIAL_BALANCE);
         assertTrue(savingsAccount.isAccountActive());
         bankingController.updateAccount(savingsAccount, BankingAction.REOPEN_ACCOUNT);
         assertTrue(savingsAccount.isAccountActive());
+    }
+
+    @Test
+    public void testReopenChequeAccount(){
+        ChequeAccount chequeAccount = createChequeAccount(0);
+        assertTrue(chequeAccount.isAccountActive());
+        bankingController.updateAccount(chequeAccount, BankingAction.REOPEN_ACCOUNT);
+        assertTrue(chequeAccount.isAccountActive());
     }
 
     @Test(expected = BankAccountException.class)
@@ -62,8 +82,18 @@ public class BankingControllerTest {
         bankingController.updateAccount(savingsAccount, BankingAction.REOPEN_ACCOUNT);
     }
 
-    private SavingsAccount createSavingsAccount(long balance) {
-        return new SavingsAccount(balance, BankAccount.SAVINGS_CREDIT_INTEREST_RATE, BankAccount.SAVINGS_DEBIT_INTEREST_RATE);
+    @Test
+    public void testChargeAccountFee(){
+        SavingsAccount savingsAccount = createSavingsAccount(INITIAL_BALANCE);
+        bankingController.updateAccount(savingsAccount, BankingAction.CHARGE_ACCOUNT_FEE);
+        assertEquals(savingsAccount.getBalanceInCents(), INITIAL_BALANCE - BankAccount.SAVINGS_ACCOUNT_FEE);
     }
 
+    private SavingsAccount createSavingsAccount(long balance) {
+        return new SavingsAccount(balance, BankAccount.SAVINGS_CREDIT_INTEREST_RATE, BankAccount.SAVINGS_DEBIT_INTEREST_RATE, BankAccount.SAVINGS_ACCOUNT_FEE);
+    }
+
+    private ChequeAccount createChequeAccount(long balance) {
+        return new ChequeAccount(balance, BankAccount.CHEQUE_CREDIT_INTEREST_RATE, BankAccount.CHEQUE_DEBIT_INTEREST_RATE, BankAccount.CHEQUE_ACCOUNT_FEE);
+    }
 }

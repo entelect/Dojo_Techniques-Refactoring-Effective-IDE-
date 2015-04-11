@@ -1,14 +1,30 @@
 package za.co.entelect.refactoring1.controller;
 
-import za.co.entelect.refactoring1.Calculator;
+import za.co.entelect.refactoring1.domain.AccountType;
 import za.co.entelect.refactoring1.domain.BankAccount;
+import za.co.entelect.refactoring1.domain.BankingAction;
+import za.co.entelect.refactoring1.domain.Image;
 import za.co.entelect.refactoring1.exception.BankAccountException;
+import za.co.entelect.refactoring1.service.Calculator;
+import za.co.entelect.refactoring1.service.ImageService;
 
 public class BankingController {
 
-    private static final long ACCOUNT_REOPEN_FEE_CENT = 2000;
+    private static final long ACCOUNT_REOPEN_FEE_CENTS = 2000;
 
     private Calculator calculator = new Calculator();
+
+    private ImageService imageService = new ImageService();
+
+    public Image fetchImage(String id) {
+        return imageService.fetch(id);
+    }
+
+    public Image uploadImage(String id, byte[] data){
+        Image image = new Image(id, data);
+        imageService.add(image);
+        return image;
+    }
 
     public void updateAccount(BankAccount bankAccount, BankingAction bankingAction){
         switch (bankingAction){
@@ -22,16 +38,18 @@ public class BankingController {
                 break;
             case REOPEN_ACCOUNT:
                 if(!bankAccount.isAccountActive()){
-                    bankAccount.getBalanceInCents();
-                    if(bankAccount.getBalanceInCents() - ACCOUNT_REOPEN_FEE_CENT < 0){
+                    if(AccountType.CHEQUE != bankAccount.getAccountType() && bankAccount.getBalanceInCents() - ACCOUNT_REOPEN_FEE_CENTS < 0){
                         throw new BankAccountException("Account does not contain a balance to debit the reopen fee");
                     }else{
-                        bankAccount.updateBalance(-ACCOUNT_REOPEN_FEE_CENT);
+                        bankAccount.updateBalance(-ACCOUNT_REOPEN_FEE_CENTS);
                         bankAccount.reopenAccount();
                     }
                 }
                 break;
-
+            case CHARGE_ACCOUNT_FEE:
+                calculator.updateBalance(bankAccount, -bankAccount.getFeeInCents());
+            break;
         }
     }
+
 }

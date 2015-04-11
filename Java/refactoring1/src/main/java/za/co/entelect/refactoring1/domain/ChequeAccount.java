@@ -2,8 +2,8 @@ package za.co.entelect.refactoring1.domain;
 
 public class ChequeAccount extends BankAccount {
 
-    public ChequeAccount(Long balanceInCents, double creditInterestsRate, double debitInterestRate) {
-        super(balanceInCents, creditInterestsRate, debitInterestRate);
+    public ChequeAccount(Long balanceInCents, double creditInterestsRate, double debitInterestRate, long accountFee) {
+        super(balanceInCents, creditInterestsRate, debitInterestRate, accountFee);
     }
 
     @Override
