@@ -1,19 +1,13 @@
 using refactoring_exercise_3.za.co.entelect.refactoring3.exception;
 
-/* Exercise 3:
- *
- * This exercise demonstrates the following code smells
- *
- * 1. Shotgun surgery/Inappropriate Intimacy : The constants should exist in the appropriate classes as well as the methods to debit the account and calculate interest
- *
- */
+
 namespace refactoring_exercise_3.za.co.entelect.refactoring3.domain
 {
     /* Exercise 3:
      *
      * This exercise demonstrates the following code smells
      *
-     * 1. Shotgun surgery/Inappropriate Intimacy : The constants should exist in the appropriate classes as well as the methods to debit the account and calculate interest
+     * 1. Shotgun surgery/Inappropriate Intimacy : The constants should exist in the appropriate classes. The methods to debit the account and calculate interest should be pulled down as well
      *
      */
     public abstract class BankAccount
