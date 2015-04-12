@@ -30,9 +30,7 @@ public class BankingControllerTest {
     @Test
     public void testRecalculateBalance(){
         SavingsAccount savingsAccount = createSavingsAccount(INITIAL_BALANCE);
-
         bankingController.updateAccount(savingsAccount, BankingAction.RECALCULATE_BALANCE);
-
         assertEquals(3150L, savingsAccount.getBalanceInCents());
     }
 

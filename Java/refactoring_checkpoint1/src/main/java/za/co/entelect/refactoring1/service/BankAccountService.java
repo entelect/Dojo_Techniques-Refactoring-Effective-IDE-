@@ -4,6 +4,9 @@ import za.co.entelect.refactoring1.domain.AccountType;
 import za.co.entelect.refactoring1.domain.BankAccount;
 import za.co.entelect.refactoring1.exception.BankAccountException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Exercise 1:
  *
@@ -22,21 +25,33 @@ import za.co.entelect.refactoring1.exception.BankAccountException;
  *
  */
 
+// this class calculates the updated balance for bank accounts
 public class BankAccountService {
+
+    private List<BankAccount> bankAccounts = new ArrayList<BankAccount>();
+
+    public int countBanksAccounts() {
+        return bankAccounts.size();
+    }
+
+    public void addBankAccount(BankAccount bankAccount){
+        bankAccounts.add(bankAccount);
+    }
 
     public void calculateInterest(BankAccount bankAccount){
         if(isSavingAccount(bankAccount) || isMoneyMarketAccount(bankAccount)){
-            updateNonCreditAccountInterest(bankAccount);
+            updateInterestNonCreditAccount(bankAccount);
         }
+
         if(isChequeAccount(bankAccount)){
-            updateCreditAccountInterest(bankAccount);
+            updateInterestCreditAccount(bankAccount);
         }
     }
 
     public void updateBalance(BankAccount bankAccount, long amountInCents){
+
         if(isSavingAccount(bankAccount) || isMoneyMarketAccount(bankAccount)){
-            hasSufficientFunds(bankAccount, amountInCents);
-            bankAccount.updateBalance(amountInCents);
+            debitNonCreditAccount(bankAccount, amountInCents);
         }
 
         if(isChequeAccount(bankAccount)){
@@ -44,7 +59,7 @@ public class BankAccountService {
         }
     }
 
-    private void updateCreditAccountInterest(BankAccount bankAccount) {
+    private void updateInterestCreditAccount(BankAccount bankAccount) {
         if(bankAccount.getBalanceInCents() < 0){
             bankAccount.updateBalance((long) (bankAccount.getBalanceInCents() * bankAccount.getDebitInterestRate()));
         }else{
@@ -52,9 +67,20 @@ public class BankAccountService {
         }
     }
 
-    private void updateNonCreditAccountInterest(BankAccount bankAccount) {
-        checkNegativeBalance(bankAccount);
+    private void updateInterestNonCreditAccount(BankAccount bankAccount) {
+        hasNegativeBalance(bankAccount);
         bankAccount.updateBalance((long) (bankAccount.getBalanceInCents() * bankAccount.getCreditInterestsRate()));
+    }
+
+    private void debitNonCreditAccount(BankAccount bankAccount, long amountInCents) {
+        hasSufficientFunds(bankAccount, amountInCents);
+        bankAccount.updateBalance(amountInCents);
+    }
+
+    private void hasNegativeBalance(BankAccount bankAccount) {
+        if(bankAccount.getBalanceInCents() < 0){
+            throw new BankAccountException("Negative balance not allowed");
+        }
     }
 
     private void hasSufficientFunds(BankAccount bankAccount, long amountInCents) {
@@ -63,10 +89,8 @@ public class BankAccountService {
         }
     }
 
-    private void checkNegativeBalance(BankAccount bankAccount) {
-        if(bankAccount.getBalanceInCents() < 0){
-            throw new BankAccountException("Negative balance not allowed");
-        }
+    private boolean isChequeAccount(BankAccount bankAccount) {
+        return AccountType.CHEQUE == bankAccount.getAccountType();
     }
 
     private boolean isMoneyMarketAccount(BankAccount bankAccount) {
@@ -75,9 +99,5 @@ public class BankAccountService {
 
     private boolean isSavingAccount(BankAccount bankAccount) {
         return AccountType.SAVINGS == bankAccount.getAccountType();
-    }
-
-    private boolean isChequeAccount(BankAccount bankAccount) {
-        return AccountType.CHEQUE == bankAccount.getAccountType();
     }
 }

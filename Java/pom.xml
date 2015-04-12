@@ -11,6 +11,7 @@
     <modules>
         <module>refactoring</module>
         <module>refactoring_checkpoint1</module>
+        <module>refactoring_checkpoint2</module>
     </modules>
 
     <dependencies>

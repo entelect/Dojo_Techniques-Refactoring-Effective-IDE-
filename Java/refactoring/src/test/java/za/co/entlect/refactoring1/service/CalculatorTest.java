@@ -22,6 +22,14 @@ public class CalculatorTest {
     private BankAccount[] bankAccounts;
 
     @Test
+    public void testAddBankAccount(){
+        createTestAccounts(1000);
+        assertEquals(0, calculator.countBanksAccounts());
+        calculator.addBankAccount(chequeAccount);
+        assertEquals(1, calculator.countBanksAccounts());
+    }
+
+    @Test
     public void testPositiveBalance() {
         createTestAccounts(INITIAL_BALANCE);
 

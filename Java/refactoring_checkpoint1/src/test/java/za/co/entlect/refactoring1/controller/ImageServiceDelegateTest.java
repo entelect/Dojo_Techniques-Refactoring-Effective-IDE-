@@ -10,10 +10,7 @@ import static junit.framework.Assert.assertNull;
 public class ImageServiceDelegateTest {
 
     private ImageServiceDelegate imageServiceDelegate = new ImageServiceDelegate();
-
     public static final String IMAGE_1 = "image_1";
-    public static final String IMAGE_2 = "image_2";
-
 
     @Test
     public void testAddImage(){
@@ -26,5 +23,4 @@ public class ImageServiceDelegateTest {
     public void testFetchImage(){
         assertNull(imageServiceDelegate.fetch(IMAGE_1));
     }
-
 }

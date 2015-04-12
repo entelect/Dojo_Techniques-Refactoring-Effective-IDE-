@@ -4,6 +4,9 @@ import za.co.entelect.refactoring1.domain.AccountType;
 import za.co.entelect.refactoring1.domain.BankAccount;
 import za.co.entelect.refactoring1.exception.BankAccountException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Exercise 1:
  *
@@ -24,6 +27,16 @@ import za.co.entelect.refactoring1.exception.BankAccountException;
 
 // this class calculates the updated balance for bank accounts
 public class Calculator {
+
+    private List<BankAccount> bankAccounts = new ArrayList<BankAccount>();
+
+    public int countBanksAccounts() {
+        return bankAccounts.size();
+    }
+
+    public void addBankAccount(BankAccount bankAccount){
+        bankAccounts.add(bankAccount);
+    }
 
     public void calculate(BankAccount bankAccount){
         //calculate the balance for a savings account
@@ -69,7 +82,7 @@ public class Calculator {
             bankAccount.updateBalance(amountInCents);
         }
 
-        //calculate the balance for a cheque money market account
+        //calculate the balance for a money market account
         if( AccountType.MONEY_MARKET == bankAccount.getAccountType()){
             //cannot go into negative balance
             if(bankAccount.getBalanceInCents() + amountInCents < 0){
