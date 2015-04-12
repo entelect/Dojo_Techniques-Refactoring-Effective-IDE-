@@ -21,7 +21,7 @@ namespace refactoring_exercise_2.test.za.co.entelect.refactoring2.service
         [Test]
         public void TestAddBankAccount(){
             SavingsAccount savingsAccount = new SavingsAccount(1000L,
-                BankAccount.SAVINGS_CREDIT_INTEREST_RATE, BankAccount.SAVINGS_DEBIT_INTEREST_RATE, BankAccount.SAVINGS_ACCOUNT_FEE);
+                BankAccount.SavingsCreditInterestRate, BankAccount.SavingsDebitInterestRate, BankAccount.SavingsAccountFee);
             Assert.That(_bankingService.CountBanksAccounts(), new EqualConstraint(0));
             _bankingService.AddBankAccount(savingsAccount);
             Assert.That(_bankingService.CountBanksAccounts(), new EqualConstraint(1));
@@ -94,13 +94,13 @@ namespace refactoring_exercise_2.test.za.co.entelect.refactoring2.service
 
         private void CreateTestAccounts(long initialBalance) {
             _savingsAccount = new SavingsAccount(initialBalance,
-                BankAccount.SAVINGS_CREDIT_INTEREST_RATE, BankAccount.SAVINGS_DEBIT_INTEREST_RATE, BankAccount.SAVINGS_ACCOUNT_FEE);
+                BankAccount.SavingsCreditInterestRate, BankAccount.SavingsDebitInterestRate, BankAccount.SavingsAccountFee);
 
             _chequeAccount = new ChequeAccount(initialBalance,
-                BankAccount.CHEQUE_CREDIT_INTEREST_RATE, BankAccount.CHEQUE_DEBIT_INTEREST_RATE, BankAccount.CHEQUE_ACCOUNT_FEE);
+                BankAccount.ChequeCreditInterestRate, BankAccount.ChequeDebitInterestRate, BankAccount.ChequeAccountFee);
 
             _moneyMarketAccount = new MoneyMarketAccount(initialBalance,
-                BankAccount.MONEY_MARKET_CREDIT_INTEREST_RATE, BankAccount.MONEY_MARKET_DEBIT_INTEREST_RATE, BankAccount.MONEY_MARKET_ACCOUNT_FEE);
+                BankAccount.MoneyMarketCreditInterestRate, BankAccount.MoneyMarketDebitInterestRate, BankAccount.MoneyMarketAccountFee);
 
             _bankAccounts = new[]{_savingsAccount, _chequeAccount, _moneyMarketAccount};
         }

@@ -59,7 +59,7 @@ namespace refactoring_exercise_1.za.co.entelect.refactoring1.controller
                     }
                     break;
                 case BankingAction.ChargeAccountFee:
-                    calculator.CalculateBalance(bankAccount, -bankAccount.GetFeeInCents());
+                    calculator.CalculateBalance(bankAccount, -bankAccount.FeeInCents);
                     break;
             }
         }

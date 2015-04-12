@@ -4,8 +4,6 @@ using refactoring_exercise_2.za.co.entelect.refactoring2.exception;
 
 namespace refactoring_exercise_2.za.co.entelect.refactoring2.service
 {
-
-
    /**
      *
      * Exercise 2:
@@ -51,19 +49,19 @@ namespace refactoring_exercise_2.za.co.entelect.refactoring2.service
             }
 
             //update the balance for a cheque account
-            if (isChequeAccount(bankAccount))
+            if (IsChequeAccount(bankAccount))
             {
                 bankAccount.UpdateBalance(amountInCents);
             }            
         }
 
-        private static void UpdateNonCreditAccountBalance(BankAccount bankAccount, long amountInCents)
+        private void UpdateNonCreditAccountBalance(BankAccount bankAccount, long amountInCents)
         {
             HasSufficientFunds(bankAccount, amountInCents);
             bankAccount.UpdateBalance(amountInCents);
         }
 
-        private static void HasSufficientFunds(BankAccount bankAccount, long amountInCents)
+        private void HasSufficientFunds(BankAccount bankAccount, long amountInCents)
         {
             if (bankAccount.BalanceInCents + amountInCents < 0)
             {
@@ -71,25 +69,25 @@ namespace refactoring_exercise_2.za.co.entelect.refactoring2.service
             }
         }
 
-        private static void CalculateCreditAccountInterest(BankAccount bankAccount)
+        private void CalculateCreditAccountInterest(BankAccount bankAccount)
         {
             if (bankAccount.BalanceInCents < 0)
             {
-                bankAccount.UpdateBalance((long) (bankAccount.BalanceInCents*bankAccount.GetDebitInterestRate()));
+                bankAccount.UpdateBalance((long) (bankAccount.BalanceInCents*bankAccount.DebitInterestRate));
             }
             else
             {
-                bankAccount.UpdateBalance((long) (bankAccount.BalanceInCents*bankAccount.GetCreditInterestsRate()));
+                bankAccount.UpdateBalance((long) (bankAccount.BalanceInCents*bankAccount.CreditInterestsRate));
             }
         }
 
-        private static void CalculateNonCreditAccountInterest(BankAccount bankAccount)
+        private void CalculateNonCreditAccountInterest(BankAccount bankAccount)
         {
             HasNegatvieBalance(bankAccount);
-            bankAccount.UpdateBalance((long) (bankAccount.BalanceInCents*bankAccount.GetCreditInterestsRate()));
+            bankAccount.UpdateBalance((long) (bankAccount.BalanceInCents*bankAccount.CreditInterestsRate));
         }
 
-        private static void HasNegatvieBalance(BankAccount bankAccount)
+        private void HasNegatvieBalance(BankAccount bankAccount)
         {
             if (bankAccount.BalanceInCents < 0)
             {
@@ -102,7 +100,7 @@ namespace refactoring_exercise_2.za.co.entelect.refactoring2.service
             return AccountType.MoneyMarket == bankAccount.GetAccountType();
         }
 
-        private bool isChequeAccount(BankAccount bankAccount)
+        private bool IsChequeAccount(BankAccount bankAccount)
         {
             return AccountType.Cheque == bankAccount.GetAccountType();
         }

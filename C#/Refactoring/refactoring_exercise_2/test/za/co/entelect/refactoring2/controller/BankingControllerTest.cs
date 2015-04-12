@@ -82,15 +82,15 @@ namespace refactoring_exercise_2.test.za.co.entelect.refactoring2.controller
         public void TestChargeAccountFee(){
             SavingsAccount savingsAccount = createSavingsAccount(InitialBalance);
             bankingController.UpdateAccount(savingsAccount, BankingAction.ChargeAccountFee);
-            Assert.That(savingsAccount.BalanceInCents, new EqualConstraint(InitialBalance - BankAccount.SAVINGS_ACCOUNT_FEE));
+            Assert.That(savingsAccount.BalanceInCents, new EqualConstraint(InitialBalance - BankAccount.SavingsAccountFee));
         }
 
         private SavingsAccount createSavingsAccount(long balance) {
-            return new SavingsAccount(balance, BankAccount.SAVINGS_CREDIT_INTEREST_RATE, BankAccount.SAVINGS_DEBIT_INTEREST_RATE, BankAccount.SAVINGS_ACCOUNT_FEE);
+            return new SavingsAccount(balance, BankAccount.SavingsCreditInterestRate, BankAccount.SavingsDebitInterestRate, BankAccount.SavingsAccountFee);
         }
 
         private ChequeAccount createChequeAccount(long balance) {
-            return new ChequeAccount(balance, BankAccount.CHEQUE_CREDIT_INTEREST_RATE, BankAccount.CHEQUE_DEBIT_INTEREST_RATE, BankAccount.CHEQUE_ACCOUNT_FEE);
+            return new ChequeAccount(balance, BankAccount.ChequeCreditInterestRate, BankAccount.ChequeDebitInterestRate, BankAccount.ChequeAccountFee);
         }
     }
 }

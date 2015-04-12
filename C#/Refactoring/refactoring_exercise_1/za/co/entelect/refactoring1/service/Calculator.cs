@@ -43,7 +43,7 @@ namespace refactoring_exercise_1.za.co.entelect.refactoring1.service
                 {
                     throw new BankAccountException("Negative balance not allowed");
                 }
-                bankAccount.UpdateBalance((long)(bankAccount.BalanceInCents * bankAccount.GetCreditInterestsRate()));
+                bankAccount.UpdateBalance((long)(bankAccount.BalanceInCents * bankAccount.CreditInterestsRate));
             }
 
             //calculate the balance for a cheque account
@@ -51,11 +51,11 @@ namespace refactoring_exercise_1.za.co.entelect.refactoring1.service
             {
                 if (bankAccount.BalanceInCents < 0)
                 {
-                    bankAccount.UpdateBalance((long)(bankAccount.BalanceInCents * bankAccount.GetDebitInterestRate()));
+                    bankAccount.UpdateBalance((long)(bankAccount.BalanceInCents * bankAccount.DebitInterestRate));
                 }
                 else
                 {
-                    bankAccount.UpdateBalance((long)(bankAccount.BalanceInCents * bankAccount.GetCreditInterestsRate()));
+                    bankAccount.UpdateBalance((long)(bankAccount.BalanceInCents * bankAccount.CreditInterestsRate));
                 }
             }
 
@@ -67,7 +67,7 @@ namespace refactoring_exercise_1.za.co.entelect.refactoring1.service
                 {
                     throw new BankAccountException("Negative balance not allowed");
                 }
-                bankAccount.UpdateBalance((long)(bankAccount.BalanceInCents * bankAccount.GetCreditInterestsRate()));
+                bankAccount.UpdateBalance((long)(bankAccount.BalanceInCents * bankAccount.CreditInterestsRate));
             }
         }
 

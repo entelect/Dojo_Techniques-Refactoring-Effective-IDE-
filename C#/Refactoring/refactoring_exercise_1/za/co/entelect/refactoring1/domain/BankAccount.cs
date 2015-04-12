@@ -4,21 +4,17 @@ namespace refactoring_exercise_1.za.co.entelect.refactoring1.domain
     public abstract class BankAccount
     {
 
-        public const double SAVINGS_CREDIT_INTEREST_RATE = 0.05D;
-        public const double SAVINGS_DEBIT_INTEREST_RATE = double.NaN;
-        public const long SAVINGS_ACCOUNT_FEE = 1000;
+        public const double SavingsCreditInterestRate = 0.05D;
+        public const double SavingsDebitInterestRate = double.NaN;
+        public const long SavingsAccountFee = 1000;
 
-        public const double MONEY_MARKET_CREDIT_INTEREST_RATE = 0.1D;
-        public const double MONEY_MARKET_DEBIT_INTEREST_RATE = double.NaN;
-        public const long MONEY_MARKET_ACCOUNT_FEE = 1200;
+        public const double MoneyMarketCreditInterestRate = 0.1D;
+        public const double MoneyMarketDebitInterestRate = double.NaN;
+        public const long MoneyMarketAccountFee = 1200;
 
-        public const double CHEQUE_CREDIT_INTEREST_RATE = 0.04D;
-        public const double CHEQUE_DEBIT_INTEREST_RATE = 0.12D;
-        public const long CHEQUE_ACCOUNT_FEE = 1400;
-
-        private readonly double creditInterestsRate;
-        private readonly double debitInterestRate;
-        private readonly long feeInCents;
+        public const double ChequeCreditInterestRate = 0.04D;
+        public const double ChequeDebitInterestRate = 0.12D;
+        public const long ChequeAccountFee = 1400;
 
         private long _balanceInCents;
         private bool _accountActive = true;
@@ -26,9 +22,9 @@ namespace refactoring_exercise_1.za.co.entelect.refactoring1.domain
         public BankAccount(long balanceInCents, double creditInterestsRate, double debitInterestRate, long fee)
         {
             this._balanceInCents = balanceInCents;
-            this.creditInterestsRate = creditInterestsRate;
-            this.debitInterestRate = debitInterestRate;
-            this.feeInCents = fee;
+            this.CreditInterestsRate = creditInterestsRate;
+            this.DebitInterestRate = debitInterestRate;
+            this.FeeInCents = fee;
         }
 
         public abstract AccountType GetAccountType();
@@ -43,15 +39,9 @@ namespace refactoring_exercise_1.za.co.entelect.refactoring1.domain
             this._balanceInCents += balanceInCents;
         }
 
-        public double GetCreditInterestsRate()
-        {
-            return creditInterestsRate;
-        }
+        public double CreditInterestsRate { get; private set; }
 
-        public double GetDebitInterestRate()
-        {
-            return debitInterestRate;
-        }
+        public double DebitInterestRate { get; private set; }
 
         public bool IsAccountActive()
         {
@@ -68,9 +58,6 @@ namespace refactoring_exercise_1.za.co.entelect.refactoring1.domain
             this._accountActive = true;
         }
 
-        public long GetFeeInCents()
-        {
-            return feeInCents;
-        }
+        public long FeeInCents { get; private set; }
     }
 }
