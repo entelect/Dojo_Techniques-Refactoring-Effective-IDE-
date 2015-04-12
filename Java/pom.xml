@@ -9,8 +9,8 @@
     <name>Refactoring Dojo</name>
 
     <modules>
-        <module>refactoring1</module>
-        <module>refactoring1_checkpoint</module>
+        <module>refactoring</module>
+        <module>refactoring_checkpoint1</module>
     </modules>
 
     <dependencies>
