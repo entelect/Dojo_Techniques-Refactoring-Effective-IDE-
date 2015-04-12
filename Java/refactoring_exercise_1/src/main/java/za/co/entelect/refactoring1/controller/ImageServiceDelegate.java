@@ -4,12 +4,6 @@ import za.co.entelect.refactoring1.domain.Image;
 import za.co.entelect.refactoring1.service.ImageService;
 
 
-/**
- * Exercise 4:
- * This code ImageServiceDelegate suffers from the following code smell
- *
- * Middle Man
- */
 public class ImageServiceDelegate {
 
    private ImageService imageService = new ImageService();
