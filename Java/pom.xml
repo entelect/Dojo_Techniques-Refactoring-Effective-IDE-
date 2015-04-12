@@ -13,6 +13,7 @@
         <module>refactoring_exercise_2</module>
         <module>refactoring_exercise_3</module>
         <module>refactoring_exercise_4</module>
+		<module>refactoring_exercise_final</module>
     </modules>
 
     <dependencies>

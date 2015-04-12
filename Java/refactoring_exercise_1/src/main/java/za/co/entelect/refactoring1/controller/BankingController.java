@@ -7,30 +7,22 @@ import za.co.entelect.refactoring1.domain.Image;
 import za.co.entelect.refactoring1.exception.BankAccountException;
 import za.co.entelect.refactoring1.service.Calculator;
 
-/*
- * Exercise 5
- *
- * The Banking controller suffers from the following issues
- *
- * 1. Inappropriate Intimacy : Unrelated method are contained in this class
- * 2. Switch statements : Refactoring to a pattern, for a example of the strategy pattern see StrategyExample
- *
- */
+
 public class BankingController {
 
     private static final long ACCOUNT_REOPEN_FEE_CENTS = 2000;
 
     private Calculator calculator = new Calculator();
 
-    private ImageServiceDelegate imageService = new ImageServiceDelegate();
+    private ImageServiceDelegate imageServiceDelegate = new ImageServiceDelegate();
 
     public Image fetchImage(String id) {
-        return imageService.fetch(id);
+        return imageServiceDelegate.fetch(id);
     }
 
     public Image uploadImage(String id, byte[] data){
         Image image = new Image(id, data);
-        imageService.add(image);
+        imageServiceDelegate.add(image);
         return image;
     }
 

@@ -15,15 +15,6 @@ import java.util.List;
  * 2. Comments
  * 4. Duplication
  * 3. Long Method
-
- *
- *
- * Exercise 2:
- *
- * After the refactoring of exercise 1 we are still left with the following smells
- *
- * 1. Feature envy :
- *
  */
 
 // this class calculates the updated balance for bank accounts

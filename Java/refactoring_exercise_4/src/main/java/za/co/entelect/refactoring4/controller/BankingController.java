@@ -11,7 +11,7 @@ import za.co.entelect.refactoring4.exception.BankAccountException;
  *
  * The Banking controller suffers from the following issues
  *
- * 1  Middle Man : The image service does not providce any value
+ * 1  Middle Man : The image service delegate does not provide any value
  * 2. Inappropriate Intimacy : Unrelated method are contained in this class
  * 3. Switch statements : Refactoring to a pattern, for a example of the strategy pattern see StrategyExample
  *
@@ -20,15 +20,15 @@ public class BankingController {
 
     private static final long ACCOUNT_REOPEN_FEE_CENTS = 2000;
 
-    private ImageServiceDelegate imageService = new ImageServiceDelegate();
+    private ImageServiceDelegate imageServiceDelegate = new ImageServiceDelegate();
 
     public Image fetchImage(String id) {
-        return imageService.fetch(id);
+        return imageServiceDelegate.fetch(id);
     }
 
     public Image uploadImage(String id, byte[] data){
         Image image = new Image(id, data);
-        imageService.add(image);
+        imageServiceDelegate.add(image);
         return image;
     }
 

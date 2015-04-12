@@ -1,18 +1,8 @@
-package za.co.entelect.refactoring1.domain;
+package za.co.entelect.refactoring_final.domain;
+
+import za.co.entelect.refactoring_final.exception.BankAccountException;
 
 public abstract class BankAccount {
-
-    public static final double SAVINGS_CREDIT_INTEREST_RATE = 0.05D;
-    public static final double SAVINGS_DEBIT_INTEREST_RATE = Double.NaN;
-    public static final long SAVINGS_ACCOUNT_FEE = 1000;
-
-    public static final double MONEY_MARKET_CREDIT_INTEREST_RATE = 0.1D;
-    public static final double MONEY_MARKET_DEBIT_INTEREST_RATE = Double.NaN;
-    public static final long MONEY_MARKET_ACCOUNT_FEE = 1200;
-
-    public static final double CHEQUE_CREDIT_INTEREST_RATE = 0.04D;
-    public static final double CHEQUE_DEBIT_INTEREST_RATE = 0.12D;
-    public static final long CHEQUE_ACCOUNT_FEE = 1400;
 
     private final double creditInterestsRate;
     private final double debitInterestRate;
@@ -61,4 +51,19 @@ public abstract class BankAccount {
     public long getFeeInCents() {
         return feeInCents;
     }
+
+    public void hasSufficientFunds(long amountInCents) {
+        if(getBalanceInCents() + amountInCents < 0){
+            throw new BankAccountException("Insufficient funds");
+        }
+    }
+
+    public void hasNegativeBalance() {
+        if(getBalanceInCents() < 0){
+            throw new BankAccountException("Negative balance not allowed");
+        }
+    }
+
+    public abstract void calculateInterest();
+    public abstract void calculateBalance(long amountInCents);
 }
