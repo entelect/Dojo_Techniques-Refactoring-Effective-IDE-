@@ -6,11 +6,11 @@ import za.co.entelect.refactoring1.domain.ChequeAccount;
 import za.co.entelect.refactoring1.domain.MoneyMarketAccount;
 import za.co.entelect.refactoring1.domain.SavingsAccount;
 import za.co.entelect.refactoring1.exception.BankAccountException;
-import za.co.entelect.refactoring1.service.AccountService;
+import za.co.entelect.refactoring1.service.BankAccountService;
 
 import static junit.framework.Assert.assertEquals;
 
-public class CalculatorTest {
+public class BankAccountServiceTest {
 
     public static final long INITIAL_BALANCE = 1000L;
 
@@ -18,7 +18,7 @@ public class CalculatorTest {
     private BankAccount moneyMarketAccount;
     private BankAccount chequeAccount;
 
-    private AccountService calculator = new AccountService();
+    private BankAccountService calculator = new BankAccountService();
     private BankAccount[] bankAccounts;
 
     @Test

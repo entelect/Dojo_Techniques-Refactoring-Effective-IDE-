@@ -5,7 +5,7 @@ import za.co.entelect.refactoring1.domain.BankAccount;
 import za.co.entelect.refactoring1.domain.BankingAction;
 import za.co.entelect.refactoring1.domain.Image;
 import za.co.entelect.refactoring1.exception.BankAccountException;
-import za.co.entelect.refactoring1.service.AccountService;
+import za.co.entelect.refactoring1.service.BankAccountService;
 
 /*
  * Exercise 5
@@ -20,7 +20,7 @@ public class BankingController {
 
     private static final long ACCOUNT_REOPEN_FEE_CENTS = 2000;
 
-    private AccountService calculator = new AccountService();
+    private BankAccountService calculator = new BankAccountService();
 
     private ImageServiceDelegate imageService = new ImageServiceDelegate();
 

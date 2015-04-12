@@ -27,7 +27,7 @@ public class Calculator {
 
     public void calculate(BankAccount bankAccount){
         //calculate the balance for a savings account
-        if(AccountType.SAVINGS == bankAccount.getAccountType()){
+        if(AccountType.SAVINGS == bankAccount.getAccountType()){// side note: it's always better to place the constant on the left, this prevents NullPointerExceptions
             //check has negative balance
             if(bankAccount.getBalanceInCents() < 0){
                 throw new BankAccountException("Negative balance not allowed");
@@ -45,8 +45,7 @@ public class Calculator {
         }
 
         //calculate the balance for a cheque money market account
-        AccountType accountType = bankAccount.getAccountType();
-        if(AccountType.MONEY_MARKET == accountType){
+        if(AccountType.MONEY_MARKET == bankAccount.getAccountType()){
             //check has negative balance
             if(bankAccount.getBalanceInCents() < 0){
                 throw new BankAccountException("Negative balance not allowed");
@@ -66,8 +65,7 @@ public class Calculator {
         }
 
         //update the balance for a cheque account
-        AccountType accountType = bankAccount.getAccountType();
-        if(AccountType.CHEQUE == accountType){
+        if(AccountType.CHEQUE == bankAccount.getAccountType()){
             bankAccount.updateBalance(amountInCents);
         }
 
