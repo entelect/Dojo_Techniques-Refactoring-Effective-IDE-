@@ -1,7 +1,6 @@
 package za.co.entelect.refactoring4.controller;
 
 import org.junit.Test;
-import za.co.entelect.refactoring4.domain.BankAccount;
 import za.co.entelect.refactoring4.domain.BankingAction;
 import za.co.entelect.refactoring4.domain.ChequeAccount;
 import za.co.entelect.refactoring4.domain.SavingsAccount;
@@ -83,14 +82,14 @@ public class BankingControllerTest {
     public void testChargeAccountFee(){
         SavingsAccount savingsAccount = createSavingsAccount(INITIAL_BALANCE);
         bankingController.updateAccount(savingsAccount, BankingAction.CHARGE_ACCOUNT_FEE);
-        assertEquals(savingsAccount.getBalanceInCents(), INITIAL_BALANCE - BankAccount.SAVINGS_ACCOUNT_FEE);
+        assertEquals(savingsAccount.getBalanceInCents(), INITIAL_BALANCE - SavingsAccount.SAVINGS_ACCOUNT_FEE);
     }
 
     private SavingsAccount createSavingsAccount(long balance) {
-        return new SavingsAccount(balance, BankAccount.SAVINGS_CREDIT_INTEREST_RATE, BankAccount.SAVINGS_DEBIT_INTEREST_RATE, BankAccount.SAVINGS_ACCOUNT_FEE);
+        return new SavingsAccount(balance);
     }
 
     private ChequeAccount createChequeAccount(long balance) {
-        return new ChequeAccount(balance, BankAccount.CHEQUE_CREDIT_INTEREST_RATE, BankAccount.CHEQUE_DEBIT_INTEREST_RATE, BankAccount.CHEQUE_ACCOUNT_FEE);
+        return new ChequeAccount(balance);
     }
 }

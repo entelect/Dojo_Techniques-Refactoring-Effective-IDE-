@@ -75,14 +75,14 @@ public class BankAccountTest {
     }
 
     private void createTestAccounts(long initialBalance) {
-        savingsAccount = new SavingsAccount(initialBalance,
-                BankAccount.SAVINGS_CREDIT_INTEREST_RATE, BankAccount.SAVINGS_DEBIT_INTEREST_RATE, BankAccount.SAVINGS_ACCOUNT_FEE);
+        savingsAccount = new SavingsAccount(initialBalance
+        );
 
-        chequeAccount = new ChequeAccount(initialBalance,
-                BankAccount.CHEQUE_CREDIT_INTEREST_RATE, BankAccount.CHEQUE_DEBIT_INTEREST_RATE, BankAccount.CHEQUE_ACCOUNT_FEE);
+        chequeAccount = new ChequeAccount(initialBalance
+        );
 
-        moneyMarketAccount = new MoneyMarketAccount(initialBalance,
-                BankAccount.MONEY_MARKET_CREDIT_INTEREST_RATE, BankAccount.MONEY_MARKET_DEBIT_INTEREST_RATE, BankAccount.MONEY_MARKET_ACCOUNT_FEE);
+        moneyMarketAccount = new MoneyMarketAccount(initialBalance
+        );
 
         bankAccounts = new BankAccount[]{savingsAccount, chequeAccount, moneyMarketAccount};
     }

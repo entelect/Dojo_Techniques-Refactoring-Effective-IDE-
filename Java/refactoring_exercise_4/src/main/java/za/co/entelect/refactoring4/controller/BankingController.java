@@ -5,22 +5,20 @@ import za.co.entelect.refactoring4.domain.BankAccount;
 import za.co.entelect.refactoring4.domain.BankingAction;
 import za.co.entelect.refactoring4.domain.Image;
 import za.co.entelect.refactoring4.exception.BankAccountException;
-import za.co.entelect.refactoring4.service.BankingService;
 
 /*
- * Exercise 5
+ * Exercise 4
  *
  * The Banking controller suffers from the following issues
  *
- * 1. Inappropriate Intimacy : Unrelated method are contained in this class
- * 2. Switch statements : Refactoring to a pattern, for a example of the strategy pattern see StrategyExample
+ * 1  Middle Man : The image service does not providce any value
+ * 2. Inappropriate Intimacy : Unrelated method are contained in this class
+ * 3. Switch statements : Refactoring to a pattern, for a example of the strategy pattern see StrategyExample
  *
  */
 public class BankingController {
 
     private static final long ACCOUNT_REOPEN_FEE_CENTS = 2000;
-
-    private BankingService bankingService = new BankingService();
 
     private ImageServiceDelegate imageService = new ImageServiceDelegate();
 

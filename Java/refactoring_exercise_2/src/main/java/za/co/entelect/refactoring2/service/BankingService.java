@@ -40,13 +40,17 @@ public class BankingService {
 
     public void calculateBalance(BankAccount bankAccount, long amountInCents){
         if(isSavingAccount(bankAccount) || isMoneyMarketAccount(bankAccount)){
-            hasSufficientFunds(bankAccount, amountInCents);
-            bankAccount.updateBalance(amountInCents);
+            updateNonCreditAccountBalance(bankAccount, amountInCents);
         }
 
         if(isChequeAccount(bankAccount)){
             bankAccount.updateBalance(amountInCents);
         }
+    }
+
+    private void updateNonCreditAccountBalance(BankAccount bankAccount, long amountInCents) {
+        hasSufficientFunds(bankAccount, amountInCents);
+        bankAccount.updateBalance(amountInCents);
     }
 
     private void calculateCreditAccountInterest(BankAccount bankAccount) {

@@ -2,26 +2,7 @@ package za.co.entelect.refactoring4.domain;
 
 import za.co.entelect.refactoring4.exception.BankAccountException;
 
-/* Exercise 3:
- *
- * This exercise demonstrates the following code smells
- *
- * 1. Shotgun surgery/Inappropriate Intimacy : The constants should exist in the appropriate classes as well as the methods to debit the account and calculate interest
- *
- */
 public abstract class BankAccount {
-
-    public static final double SAVINGS_CREDIT_INTEREST_RATE = 0.05D;
-    public static final double SAVINGS_DEBIT_INTEREST_RATE = Double.NaN;
-    public static final long SAVINGS_ACCOUNT_FEE = 1000;
-
-    public static final double MONEY_MARKET_CREDIT_INTEREST_RATE = 0.1D;
-    public static final double MONEY_MARKET_DEBIT_INTEREST_RATE = Double.NaN;
-    public static final long MONEY_MARKET_ACCOUNT_FEE = 1200;
-
-    public static final double CHEQUE_CREDIT_INTEREST_RATE = 0.04D;
-    public static final double CHEQUE_DEBIT_INTEREST_RATE = 0.12D;
-    public static final long CHEQUE_ACCOUNT_FEE = 1400;
 
     private final double creditInterestsRate;
     private final double debitInterestRate;
@@ -71,18 +52,6 @@ public abstract class BankAccount {
         return feeInCents;
     }
 
-    public boolean isMoneyMarketAccount() {
-        return AccountType.MONEY_MARKET == getAccountType();
-    }
-
-    public boolean isSavingAccount() {
-        return AccountType.SAVINGS == getAccountType();
-    }
-
-    public boolean isChequeAccount() {
-        return AccountType.CHEQUE == getAccountType();
-    }
-
     public void hasSufficientFunds(long amountInCents) {
         if(getBalanceInCents() + amountInCents < 0){
             throw new BankAccountException("Insufficient funds");
@@ -95,37 +64,6 @@ public abstract class BankAccount {
         }
     }
 
-    public void calculateNonCreditAccountInterest() {
-        hasNegativeBalance();
-        updateBalance((long) (getBalanceInCents() * getCreditInterestsRate()));
-    }
-
-    public void calculateCreditAccountInterest() {
-        if(getBalanceInCents() < 0){
-            updateBalance((long) (getBalanceInCents() * getDebitInterestRate()));
-        }else{
-            updateBalance((long) (getBalanceInCents() * getCreditInterestsRate()));
-        }
-    }
-
-    public void calculateInterest(){
-        if(isSavingAccount() || isMoneyMarketAccount()){
-            calculateNonCreditAccountInterest();
-        }
-
-        if(isChequeAccount()){
-            calculateCreditAccountInterest();
-        }
-    }
-
-    public void calculateBalance(long amountInCents){
-        if(isSavingAccount() || isMoneyMarketAccount()){
-            hasSufficientFunds(amountInCents);
-            updateBalance(amountInCents);
-        }
-
-        if(isChequeAccount()){
-            updateBalance(amountInCents);
-        }
-    }
+    public abstract void calculateInterest();
+    public abstract void calculateBalance(long amountInCents);
 }

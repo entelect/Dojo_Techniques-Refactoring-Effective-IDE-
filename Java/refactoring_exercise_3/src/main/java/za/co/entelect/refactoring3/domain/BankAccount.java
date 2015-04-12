@@ -120,12 +120,16 @@ public abstract class BankAccount {
 
     public void calculateBalance(long amountInCents){
         if(isSavingAccount() || isMoneyMarketAccount()){
-            hasSufficientFunds(amountInCents);
-            updateBalance(amountInCents);
+            updateNonCreditAccountBalance(amountInCents);
         }
 
         if(isChequeAccount()){
             updateBalance(amountInCents);
         }
+    }
+
+    private void updateNonCreditAccountBalance(long amountInCents) {
+        hasSufficientFunds(amountInCents);
+        updateBalance(amountInCents);
     }
 }
