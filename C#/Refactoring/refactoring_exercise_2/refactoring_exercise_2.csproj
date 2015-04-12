@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,6 +43,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="test\za\co\entelect\refactoring2\controller\BankingControllerTest.cs" />
+    <Compile Include="test\za\co\entelect\refactoring2\controller\ImageServiceDelegateTest.cs" />
+    <Compile Include="test\za\co\entelect\refactoring2\controller\StrategyExample.cs" />
+    <Compile Include="test\za\co\entelect\refactoring2\controller\StrategyExampleTest.cs" />
+    <Compile Include="test\za\co\entelect\refactoring2\service\BankAccountServiceTest.cs" />
+    <Compile Include="test\za\co\entelect\refactoring2\service\ImageServiceTest.cs" />
+    <Compile Include="za\co\entelect\refactoring2\controller\BankingController.cs" />
+    <Compile Include="za\co\entelect\refactoring2\controller\ImageServiceDelegate.cs" />
+    <Compile Include="za\co\entelect\refactoring2\domain\AccountType.cs" />
+    <Compile Include="za\co\entelect\refactoring2\domain\BankAccount.cs" />
+    <Compile Include="za\co\entelect\refactoring2\domain\BankingAction.cs" />
+    <Compile Include="za\co\entelect\refactoring2\domain\ChequeAccount.cs" />
+    <Compile Include="za\co\entelect\refactoring2\domain\Image.cs" />
+    <Compile Include="za\co\entelect\refactoring2\domain\MoneyMarketAccount.cs" />
+    <Compile Include="za\co\entelect\refactoring2\domain\SavingsAccount.cs" />
+    <Compile Include="za\co\entelect\refactoring2\exception\BankAccountException.cs" />
+    <Compile Include="za\co\entelect\refactoring2\service\BankingService.cs" />
+    <Compile Include="za\co\entelect\refactoring2\service\ImageService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
