@@ -16,7 +16,6 @@ import java.util.List;
  * 1. Feature envy : The class is too tightly coupled with the internals of the BankAccount
  *
  */
-
 public class BankingService {
 
     private List<BankAccount> bankAccounts = new ArrayList<BankAccount>();

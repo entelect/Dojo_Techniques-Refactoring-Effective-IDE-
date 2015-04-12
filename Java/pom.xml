@@ -11,6 +11,8 @@
     <modules>
         <module>refactoring_exercise_1</module>
         <module>refactoring_exercise_2</module>
+        <module>refactoring_exercise_3</module>
+        <module>refactoring_exercise_4</module>
     </modules>
 
     <dependencies>

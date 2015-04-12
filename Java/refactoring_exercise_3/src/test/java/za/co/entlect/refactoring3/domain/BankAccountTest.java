@@ -1,16 +1,15 @@
-package za.co.entlect.refactoring1.service;
+package za.co.entlect.refactoring3.domain;
 
 import org.junit.Test;
-import za.co.entelect.refactoring1.domain.BankAccount;
-import za.co.entelect.refactoring1.domain.ChequeAccount;
-import za.co.entelect.refactoring1.domain.MoneyMarketAccount;
-import za.co.entelect.refactoring1.domain.SavingsAccount;
-import za.co.entelect.refactoring1.exception.BankAccountException;
-import za.co.entelect.refactoring1.service.BankAccountService;
+import za.co.entelect.refactoring3.domain.BankAccount;
+import za.co.entelect.refactoring3.domain.ChequeAccount;
+import za.co.entelect.refactoring3.domain.MoneyMarketAccount;
+import za.co.entelect.refactoring3.domain.SavingsAccount;
+import za.co.entelect.refactoring3.exception.BankAccountException;
 
 import static junit.framework.Assert.assertEquals;
 
-public class BankAccountServiceTest {
+public class BankAccountTest {
 
     public static final long INITIAL_BALANCE = 1000L;
 
@@ -18,28 +17,19 @@ public class BankAccountServiceTest {
     private BankAccount moneyMarketAccount;
     private BankAccount chequeAccount;
 
-    private BankAccountService calculator = new BankAccountService();
     private BankAccount[] bankAccounts;
-
-    @Test
-    public void testAddBankAccount(){
-        createTestAccounts(1000);
-        assertEquals(0, calculator.countBanksAccounts());
-        calculator.addBankAccount(chequeAccount);
-        assertEquals(1, calculator.countBanksAccounts());
-    }
 
     @Test
     public void testPositiveBalance() {
         createTestAccounts(INITIAL_BALANCE);
 
-        calculator.calculateInterest(savingsAccount);
+        savingsAccount.calculateInterest();
         assertEquals(1050, savingsAccount.getBalanceInCents());
 
-        calculator.calculateInterest(chequeAccount);
+        chequeAccount.calculateInterest();
         assertEquals(1040, chequeAccount.getBalanceInCents());
 
-        calculator.calculateInterest(moneyMarketAccount);
+        moneyMarketAccount.calculateInterest();
         assertEquals(1100, moneyMarketAccount.getBalanceInCents());
     }
 
@@ -47,20 +37,20 @@ public class BankAccountServiceTest {
     public void testNegativeBalanceChequeAccount() {
         createTestAccounts(-500L);
 
-        calculator.calculateInterest(chequeAccount);
+        chequeAccount.calculateInterest();
         assertEquals(-560, chequeAccount.getBalanceInCents());
     }
 
     @Test(expected = RuntimeException.class)
     public void testNegativeBalanceSavingsAccount() {
         createTestAccounts(-500L);
-        calculator.calculateInterest(savingsAccount);
+        savingsAccount.calculateInterest();
     }
 
     @Test(expected = RuntimeException.class)
     public void testNegativeBalanceMoneyMarketAccount() {
         createTestAccounts(-500L);
-        calculator.calculateInterest(moneyMarketAccount);
+        moneyMarketAccount.calculateInterest();
     }
 
     @Test
@@ -68,10 +58,10 @@ public class BankAccountServiceTest {
         createTestAccounts(INITIAL_BALANCE);
 
         for (int i = 0; i < bankAccounts.length; i++) {
-            calculator.updateBalance(bankAccounts[i], -500);
+            bankAccounts[i].calculateBalance(-500);
             assertEquals(500, bankAccounts[i].getBalanceInCents());
 
-            calculator.updateBalance(bankAccounts[i], 1000);
+            bankAccounts[i].calculateBalance(1000);
             assertEquals(1500, bankAccounts[i].getBalanceInCents());
         }
     }
@@ -79,13 +69,13 @@ public class BankAccountServiceTest {
     @Test(expected = BankAccountException.class)
     public void testUpdateSavingsAccountBalanceFail(){
         createTestAccounts(INITIAL_BALANCE);
-        calculator.updateBalance(savingsAccount, -INITIAL_BALANCE*2);
+        savingsAccount.calculateBalance(-INITIAL_BALANCE * 2);
     }
 
     @Test(expected = BankAccountException.class)
     public void testUpdateMoneyMarketAccountBalanceFail(){
         createTestAccounts(INITIAL_BALANCE);
-        calculator.updateBalance(moneyMarketAccount, -INITIAL_BALANCE*2);
+        moneyMarketAccount.calculateBalance(-INITIAL_BALANCE * 2);
     }
 
     private void createTestAccounts(long initialBalance) {
