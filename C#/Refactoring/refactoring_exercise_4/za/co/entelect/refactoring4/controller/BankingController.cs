@@ -10,9 +10,9 @@ namespace refactoring_exercise_4.za.co.entelect.refactoring4.controller
       *
       * The Banking controller suffers from the following issues
       *
-      * 1  Middle Man : The image service delegate does not provide any value
-      * 2. Inappropriate Intimacy : Unrelated methods are contained in this class
-      * 3. Switch statements : Refactoring to a pattern, for a example of the strategy pattern see StrategyExample
+      * 1. Switch statements : Refactoring to a pattern, for a example of the strategy pattern see StrategyExample
+     *  2  Middle Man : The image service delegate does not provide any value
+      * 3. There is one more issue in this class?
       *
       */
     public class BankingController
