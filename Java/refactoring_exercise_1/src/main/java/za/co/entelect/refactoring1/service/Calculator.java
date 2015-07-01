@@ -49,7 +49,7 @@ public class Calculator {
             }
         }
 
-        //calculate the balance for a cheque money market account
+        //calculate the balance for a money market account
         if(AccountType.MONEY_MARKET == bankAccount.getAccountType()){
             //check has negative balance
             if(bankAccount.getBalanceInCents() < 0){
