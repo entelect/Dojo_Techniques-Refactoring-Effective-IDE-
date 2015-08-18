@@ -67,7 +67,7 @@ namespace refactoring_exercise_4.za.co.entelect.refactoring4.domain
 
         public long FeeInCents { get; private set; }
 
-        public void HasNegatvieBalance()
+        public void HasNegativeBalance()
         {
             if (BalanceInCents < 0)
             {

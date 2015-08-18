@@ -22,7 +22,7 @@ namespace refactoring_exercise_final.za.co.entelect.refactoring_final.domain
 
         public override void CalculateInterest()
         {
-            this.HasNegatvieBalance();
+            this.HasNegativeBalance();
             this.UpdateBalance((long) (this.BalanceInCents*this.CreditInterestsRate));
         }
 

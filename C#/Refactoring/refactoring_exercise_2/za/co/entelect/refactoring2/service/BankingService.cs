@@ -83,11 +83,11 @@ namespace refactoring_exercise_2.za.co.entelect.refactoring2.service
 
         private void CalculateNonCreditAccountInterest(BankAccount bankAccount)
         {
-            HasNegatvieBalance(bankAccount);
+            HasNegativeBalance(bankAccount);
             bankAccount.UpdateBalance((long) (bankAccount.BalanceInCents*bankAccount.CreditInterestsRate));
         }
 
-        private void HasNegatvieBalance(BankAccount bankAccount)
+        private void HasNegativeBalance(BankAccount bankAccount)
         {
             if (bankAccount.BalanceInCents < 0)
             {

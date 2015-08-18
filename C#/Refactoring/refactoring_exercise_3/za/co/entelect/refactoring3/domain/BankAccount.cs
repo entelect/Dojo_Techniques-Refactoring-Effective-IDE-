@@ -111,7 +111,7 @@ namespace refactoring_exercise_3.za.co.entelect.refactoring3.domain
             return AccountType.Savings == GetAccountType();
         }
 
-        public void HasNegatvieBalance()
+        public void HasNegativeBalance()
         {
             if (BalanceInCents < 0)
             {
@@ -121,7 +121,7 @@ namespace refactoring_exercise_3.za.co.entelect.refactoring3.domain
 
         public void CalculateNonCreditAccountInterest()
         {
-            HasNegatvieBalance();
+            HasNegativeBalance();
             UpdateBalance((long) (BalanceInCents*CreditInterestsRate));
         }
 

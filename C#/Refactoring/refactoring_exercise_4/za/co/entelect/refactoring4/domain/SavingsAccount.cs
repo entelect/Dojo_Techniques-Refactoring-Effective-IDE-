@@ -20,7 +20,7 @@ namespace refactoring_exercise_4.za.co.entelect.refactoring4.domain
 
         public override void CalculateInterest()
         {
-            HasNegatvieBalance();
+            HasNegativeBalance();
             UpdateBalance((long) (BalanceInCents*CreditInterestsRate));
         }
 
