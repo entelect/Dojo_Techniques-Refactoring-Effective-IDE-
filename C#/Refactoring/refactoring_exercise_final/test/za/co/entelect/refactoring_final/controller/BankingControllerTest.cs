@@ -62,11 +62,10 @@ namespace refactoring_exercise_final.test.za.co.entelect.refactoring_final.contr
         }
 
         [Test]
-        [ExpectedException( typeof (BankAccountException))]
         public void TestReopenAccountFail(){
             SavingsAccount savingsAccount = createSavingsAccount(0L);
             savingsAccount.CloseAccount();
-            bankingController.UpdateAccount(savingsAccount, BankingAction.ReopenAccount);
+            Assert.Throws<BankAccountException>(() => bankingController.UpdateAccount(savingsAccount, BankingAction.ReopenAccount));
         }
 
         [Test]

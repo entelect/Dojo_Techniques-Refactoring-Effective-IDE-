@@ -50,17 +50,15 @@ namespace refactoring_exercise_2.test.za.co.entelect.refactoring2.service
         }
 
         [Test]
-        [ExpectedException( typeof (BankAccountException))]
         public void TestNegativeBalanceSavingsAccount() {
             CreateTestAccounts(-500L);
-            _bankingService.CalculateInterest(_savingsAccount);
+            Assert.Throws<BankAccountException>(() => _bankingService.CalculateInterest(_savingsAccount));
         }
 
         [Test]
-        [ExpectedException( typeof (BankAccountException))]
         public void TestNegativeBalanceMoneyMarketAccount() {
             CreateTestAccounts(-500L);
-            _bankingService.CalculateInterest(_moneyMarketAccount);
+            Assert.Throws<BankAccountException>(() => _bankingService.CalculateInterest(_moneyMarketAccount));
         }
 
         [Test]
@@ -79,17 +77,15 @@ namespace refactoring_exercise_2.test.za.co.entelect.refactoring2.service
         }
 
         [Test]
-        [ExpectedException( typeof (BankAccountException))]
         public void TestUpdateSavingsAccountBalanceFail(){
             CreateTestAccounts(InitialBalance);
-            _bankingService.CalculateBalance(_savingsAccount, -InitialBalance * 2);
+            Assert.Throws<BankAccountException>(() => _bankingService.CalculateBalance(_savingsAccount, -InitialBalance * 2));
         }
 
         [Test]
-        [ExpectedException(typeof(BankAccountException))]
         public void TestUpdateMoneyMarketAccountBalanceFail(){
             CreateTestAccounts(InitialBalance);
-            _bankingService.CalculateBalance(_moneyMarketAccount, -InitialBalance * 2);
+            Assert.Throws<BankAccountException>(() => _bankingService.CalculateBalance(_moneyMarketAccount, -InitialBalance * 2));
         }
 
         private void CreateTestAccounts(long initialBalance) {

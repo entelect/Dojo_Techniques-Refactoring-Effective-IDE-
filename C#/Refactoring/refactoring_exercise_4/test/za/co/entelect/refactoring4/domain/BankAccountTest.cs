@@ -40,19 +40,17 @@ namespace refactoring_exercise_4.test.za.co.entelect.refactoring4.domain
         }
 
         [Test]
-        [ExpectedException(typeof(BankAccountException))]
         public void TestNegativeBalanceSavingsAccount()
         {
             CreateTestAccounts(-500L);
-            _savingsAccount.CalculateInterest();
+            Assert.Throws<BankAccountException>(() => _savingsAccount.CalculateInterest());
         }
 
         [Test]
-        [ExpectedException(typeof(BankAccountException))]
         public void TestNegativeBalanceMoneyMarketAccount()
         {
             CreateTestAccounts(-500L);
-            _moneyMarketAccount.CalculateInterest();
+            Assert.Throws<BankAccountException>(() => _moneyMarketAccount.CalculateInterest());
         }
 
         [Test]
@@ -71,19 +69,17 @@ namespace refactoring_exercise_4.test.za.co.entelect.refactoring4.domain
         }
 
         [Test]
-        [ExpectedException(typeof(BankAccountException))]
         public void TestUpdateSavingsAccountBalanceFail()
         {
             CreateTestAccounts(InitialBalance);
-            _savingsAccount.CalculateBalance(-InitialBalance * 2);
+            Assert.Throws<BankAccountException>(() => _savingsAccount.CalculateBalance(-InitialBalance * 2));
         }
 
         [Test]
-        [ExpectedException(typeof(BankAccountException))]
         public void TestUpdateMoneyMarketAccountBalanceFail()
         {
             CreateTestAccounts(InitialBalance);
-            _moneyMarketAccount.CalculateBalance(-InitialBalance * 2);
+            Assert.Throws<BankAccountException>(() => _moneyMarketAccount.CalculateBalance(-InitialBalance * 2));
         }
 
         private void CreateTestAccounts(long initialBalance)
